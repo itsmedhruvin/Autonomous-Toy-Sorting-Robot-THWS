@@ -17,7 +17,7 @@ BEng Mechatronics Programme · Schweinfurt, Germany
 
 This project was developed as part of the **BEng Mechatronics programme at THWS** (Technical University of Applied Sciences Würzburg-Schweinfurt). A physical robot was built from scratch and programmed to complete a toy-sorting task fully autonomously — no human intervention at any stage.
 
-The AI algorithms, ROS 2 architecture, and code are adapted from the **[Artificial Intelligence for Robotics – 2nd Edition](https://www.coursera.org/learn/packt-artificial-intelligence-for-robotics/)** course by Packt (Coursera), and deployed on a **real physical robot** built and tested at THWS.
+The AI algorithms, ROS 2 architecture and deployed on a **real physical robot** built and tested at THWS.
 
 ### The Task
 
