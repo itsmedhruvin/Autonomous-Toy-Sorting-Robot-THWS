@@ -280,7 +280,6 @@ Original repository: [PacktPublishing/Artificial-Intelligence-for-Robotics-2e](h
 
 This project is licensed under the **MIT Licence** — see [LICENSE](LICENSE) for full details.
 
-The original course code is copyright © Packt Publishing and Francis X. Govers III, used and adapted under the MIT licence granted by the original repository.
 
 ---
 
