@@ -1,9 +1,6 @@
 #
 # decision tree classifier 
-# author: Francis X Govers III
-# 
-# example from book "Artificial Intelligece for Roboics"
-#
+
 from sklearn import tree
 import numpy as np
 import pandas as pd

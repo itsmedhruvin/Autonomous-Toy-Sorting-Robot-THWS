@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jul  9 23:45:19 2018
-
-@author: bh47612
+Project: Autonomous Toy-Sorting Robot
+Author: Dhruvin Vekariya
+Accosiation: Technical University of Applied Science Würzburg-Schweinfurt
 """
 
 import numpy as np

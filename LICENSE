@@ -1,6 +1,8 @@
 MIT License
 
-Copyright (c) 2025 [Your Name] — THWS Robotics Programme
+Copyright (c) 2025 Dhruvin Vekariya
+Technical University of Applied Sciences Würzburg-Schweinfurt (THWS)
+BEng Mechatronics Programme — Schweinfurt, Germany
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +22,49 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
----
-This project was developed at THWS — Technical University of Applied Sciences
-Würzburg-Schweinfurt as part of the BEng Mechatronics programme.
+-------------------------------------------------------------------------------
 
+ACADEMIC CONTEXT
+
+This software was developed as a university project at:
+
+  THWS — Technische Hochschule Würzburg-Schweinfurt
+  Technical University of Applied Sciences Würzburg-Schweinfurt
+  Ignaz-Schön-Straße 11, 97421 Schweinfurt, Germany
+  https://www.thws.de/en/
+
+  Programme:  BEng Mechatronics
+  Supervisor: Prof. Dr. Florian Mühlfeld
+  Semester:   Semester 4 — Winter 2024/25
+  Author:     Dhruvin Vekariya — github.com/itsmedhruvin
+
+-------------------------------------------------------------------------------
+
+THIRD-PARTY CODE ATTRIBUTION
+
+Portions of this software are adapted from:
+
+  "Artificial Intelligence for Robotics – Second Edition"
+  Author:    Francis X. Govers III
+  Publisher: Packt Publishing Ltd.
+  Course:    https://www.coursera.org/learn/packt-artificial-intelligence-for-robotics/
+  GitHub:    https://github.com/PacktPublishing/Artificial-Intelligence-for-Robotics-2e
+
+  Original code copyright © 2024 Packt Publishing and Francis X. Govers III.
+  Used and adapted under the MIT Licence granted by the original repository.
+
+  Modules adapted from course:
+    Chapter 4 → 1.ToyDetection_with_NeuralNetwork_SupervisedLearning/
+    Chapter 5 → 2.pickingUp_puttingAway_with_ReinforcementLearning_&_GeneticAlgoritham/
+    Chapter 7 → 3.toy_navigation_with_CNN/
+    Chapter 8 → 4.Putting_things_away_with_DesicionTree_&_A_star_algoritham/
+    Chapter 2 → ros2_nodes/
+
+Additional third-party components used under their respective licences:
+
+  Ultralytics YOLOv8   AGPL-3.0    https://github.com/ultralytics/ultralytics
+  OpenCV               Apache 2.0  https://opencv.org/
+  ROS 2 Humble         Apache 2.0  https://docs.ros.org/en/humble/
+  NumPy                BSD         https://numpy.org/
+
+-------------------------------------------------------------------------------

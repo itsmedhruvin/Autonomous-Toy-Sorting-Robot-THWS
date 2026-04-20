@@ -3,10 +3,6 @@
 #
 # decision tree classifier 
 # one hot encoding with "Gini" criteria
-# author: Francis X Govers III
-# 
-# example from book "Artificial Intelligece for Roboics"
-#
 from sklearn import tree
 import numpy as np
 import pandas as pd

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul 11 00:08:14 2018
-
-@author: bh47612
+Project: Autonomous Toy-Sorting Robot
+Author: Dhruvin Vekariya
+Accosiation: Technical University of Applied Science Würzburg-Schweinfurt
 """
 # navigation program
 # using neural network with ROS interface

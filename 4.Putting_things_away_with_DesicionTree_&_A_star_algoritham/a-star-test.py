@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jul 28 21:45:53 2018
-
-@author: Francis
+Project: Autonomous Toy-Sorting Robot
+Author: Dhruvin Vekariya
+Accosiation: Technical University of Applied Science Würzburg-Schweinfurt
 """
 
 #Here is some Python code to illustrate how the A* algorithm works:

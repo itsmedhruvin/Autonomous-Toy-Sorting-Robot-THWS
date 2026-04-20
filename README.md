@@ -1,9 +1,7 @@
 # 🤖 Autonomous Toy-Sorting Robot
-### Project: Autonomous Toy-Sorting Robot
-### Author: Dhruvin Vekariya
-### Accosiation: Technical University of Applied Science Würzburg-Schweinfurt
 
-**BEng Mechatronics Programme · Schweinfurt, Germany**
+**Technical University of Applied Sciences Würzburg-Schweinfurt (THWS)**
+BEng Mechatronics Programme · Schweinfurt, Germany
 
 ---
 
@@ -17,16 +15,18 @@
 
 ## 📌 Project Overview
 
-This project was developed as part of the **BEng Mechatronics programme at THWS** (Technical University of Applied Sciences Würzburg-Schweinfurt). It implements a fully autonomous physical robot that completes a toy-sorting task from start to finish without any human intervention.
+This project was developed as part of the **BEng Mechatronics programme at THWS** (Technical University of Applied Sciences Würzburg-Schweinfurt). A physical robot was built from scratch and programmed to complete a toy-sorting task fully autonomously — no human intervention at any stage.
+
+The AI algorithms, ROS 2 architecture, and code are adapted from the **[Artificial Intelligence for Robotics – 2nd Edition](https://www.coursera.org/learn/packt-artificial-intelligence-for-robotics/)** course by Packt (Coursera), and deployed on a **real physical robot** built and tested at THWS.
 
 ### The Task
-> A physical robot is placed in a room with toys scattered on the floor.
-> It must **detect** each toy, **navigate** towards it, **pick it up**, and **throw it into a toy basket** — fully autonomously.
 
+> A physical robot is placed in a room with toys scattered on the floor.
+> It must **detect** each toy, **navigate** towards it, **pick it up**, and **throw it into a toy basket** — fully autonomously, repeating until all toys are cleared.
 
 ---
 
-## 🎯 What the Robot Does — Step by Step
+## 🎯 Robot Pipeline — Step by Step
 
 ```
 [START]
@@ -41,7 +41,10 @@ This project was developed as part of the **BEng Mechatronics programme at THWS*
 [Navigate to toy] ──► Obstacle? ──► Avoid and reroute
    │
    ▼
-[Q-Learning arm picks up toy]
+[Reinforcement Learning arm picks up toy]
+   │
+   ▼
+[Decision Tree + A* plans path to basket]
    │
    ▼
 [Throw toy into basket]
@@ -61,104 +64,140 @@ This project was developed as part of the **BEng Mechatronics programme at THWS*
 |---|---|
 | Robot OS | ROS 2 Humble |
 | Language | Python 3.10 |
-| Object Detection | YOLOv8 (Ultralytics) |
+| Object Detection | YOLOv8 + Supervised Learning (Neural Network) |
 | Computer Vision | OpenCV |
-| AI / RL | Q-Learning (from scratch) |
+| Pick & Place AI | Reinforcement Learning (Q-Learning) + Genetic Algorithm |
 | Navigation | CNN-based, no SLAM |
-| Hardware | Physical robot with camera, arm, wheels, sensors |
+| Path Planning | Decision Tree + A* Algorithm |
+| Hardware Brain | NVIDIA Jetson Nano 8GB (Ubuntu 20.04) |
+| Motor Control | Arduino Mega 2560 |
+| Development Machine | Laptop / Desktop running Ubuntu (or VirtualBox on Windows) |
+
+---
+
+## 🔧 Hardware & Software Setup
+
+The system runs across three environments working together:
+
+### 1. Laptop / Desktop Computer
+- Runs the **control panel** and trains neural networks
+- Runs **ROS 2 Humble** on Ubuntu 22.04 (or via Oracle VirtualBox on Windows)
+- Used for teleoperation during navigation training with a PlayStation controller
+- Hosts all Python training scripts and model development
+
+### 2. NVIDIA Jetson Nano 8GB
+- Runs **Ubuntu 20.04** and **ROS 2** directly on the physical robot
+- Executes all real-time AI inference: YOLOv8, CNN navigation, Q-Learning arm control
+- Processes live camera feed and publishes ROS 2 topics
+- Connected to sensors, camera, and Arduino via serial
+
+### 3. Arduino Mega 2560
+- Controls the **wheel motors** on the physical robot base
+- Handles low-level PWM motor signals and emergency stop
+- Programmed with the Arduino IDE (Windows or Linux)
+- Communicates with the Jetson Nano over serial interface
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-thws-toy-sorting-robot/
+Autonomous-Toy-Sorting-Robot-THWS/
 │
-├── README.md                        ← You are here
-├── requirements.txt                 ← Python dependencies
+├── README.md
+├── requirements.txt
 ├── LICENSE
 │
-├── detection/
-│   ├── yolo_detector.py             ← YOLOv8 live toy detection
-│   ├── train_model.py               ← Custom model training script
-│   └── models/
-│       └── toy_detector.pt          ← Trained YOLOv8 weights (add yours)
+├── 1.ToyDetection_with_NeuralNetwork_SupervisedLearning/
+│   └── ← YOLOv8 toy detection — trained with supervised learning
+│       Detects toys in live camera feed and classifies them
 │
-├── navigation/
-│   ├── navigator.py                 ← Main navigation controller
-│   └── obstacle_avoider.py          ← Real-time obstacle avoidance
+├── 2.pickingUp_puttingAway_with_ReinforcementLearning_&_GeneticAlgoritham/
+│   └── ← Q-Learning arm control + Genetic Algorithm path optimisation
+│       Robot arm learns to grasp and throw toys into the basket
 │
-├── manipulation/
-│   ├── arm_controller.py            ← Physical robot arm interface
-│   └── q_learning_agent.py          ← Q-Learning agent (built from scratch)
+├── 3.toy_navigation_with_CNN/
+│   └── ← CNN-based navigation without SLAM
+│       Robot steers towards toy using camera + sensor data
+│
+├── 4.Putting_things_away_with_DesicionTree_&_A_star_algoritham/
+│   └── ← Decision Tree classification + A* path planning
+│       Plans the optimal route from toy to basket
 │
 ├── ros2_nodes/
-│   ├── robot_brain.py               ← Master orchestration node
-│   ├── detection_node.py            ← ROS 2 detection publisher
-│   ├── navigation_node.py           ← ROS 2 navigation node
-│   ├── manipulation_node.py         ← ROS 2 arm control node
-│   └── launch/
-│       └── full_system.launch.py    ← Launch all nodes together
+│   └── ← All ROS 2 nodes — detection, navigation, manipulation, brain
 │
 ├── config/
-│   └── robot_params.yaml            ← Robot configuration parameters
+│   └── robot_params.yaml   ← Robot configuration parameters
 │
-├── docs/
-│   ├── system_diagram.png           ← Add your system diagram
-│   └── demo_video_link.md           ← Link to demo video
-│
-└── tests/
-    ├── test_detection.py
-    ├── test_navigation.py
-    └── test_q_learning.py
+└── supporting_pictures/
+    └── ← Photos and diagrams of the physical robot and system
 ```
 
 ---
 
 ## 🧠 AI Modules — How Each One Works
 
-### 1. Object Detection — YOLOv8 (`detection/yolo_detector.py`)
-- Custom YOLOv8 model trained on toy images
-- Runs on live camera feed from the physical robot
-- Returns bounding box coordinates and confidence score
-- Publishes toy position to ROS 2 topic `/toy_detection`
+### Module 1 — Toy Detection with Neural Network & Supervised Learning
+📁 `1.ToyDetection_with_NeuralNetwork_SupervisedLearning/`
 
-### 2. Navigation — CNN + Obstacle Avoidance (`navigation/navigator.py`)
-- Moves robot towards detected toy coordinates
-- Uses sensor data to detect and avoid obstacles in real time
-- No SLAM — purely sensor-driven reactive navigation
-- Stops when robot is within grasping range of toy
+- Custom YOLOv8 model trained on toy images via supervised learning
+- Uses transfer learning to extend YOLOv8 to recognise specific toys
+- Runs on live camera feed from the physical robot in real time
+- Returns bounding box + confidence score, published to ROS 2 topic `/toy_detection`
+- Dataset prepared via Roboflow: `rf.workspace("toys").project("toydetector")`
 
-### 3. Pick & Place — Q-Learning (`manipulation/q_learning_agent.py`)
-- **Built from scratch** — no RL library used
-- Q-table maps (state → action) for robot arm control
-- Actions: extend, rotate left, rotate right, grip, release, throw
-- Reward: +10 for successful grasp, -1 per failed step
-- Learns optimal policy through repeated physical trials
-- After grasping: arm throws toy into basket
+### Module 2 — Pick & Place with Reinforcement Learning & Genetic Algorithm
+📁 `2.pickingUp_puttingAway_with_ReinforcementLearning_&_GeneticAlgoritham/`
 
-### 4. ROS 2 Orchestration (`ros2_nodes/robot_brain.py`)
-- Master node coordinates all sub-modules
-- Detection → Navigation → Manipulation pipeline
-- All nodes communicate via ROS 2 topics
-- Single launch file starts entire system
+- **Q-Learning** trains the robot arm to grasp toys through physical trial and reward
+- Q-table maps arm states → actions (extend, lower, grip, throw, etc.)
+- **Genetic Algorithm** optimises the pick-and-place movement path
+- Reward: +10 for successful grasp, +20 for throw into basket, −0.1 per step
+- Learns entirely from interaction with the physical environment — no hard-coded moves
+
+### Module 3 — Navigation with CNN
+📁 `3.toy_navigation_with_CNN/`
+
+- CNN-based navigation controller — no SLAM, no pre-built map
+- Processes camera and sensor images to steer the robot towards the detected toy
+- Handles real-time obstacle detection and avoidance
+- Stops when robot is within grasping range of the toy
+
+### Module 4 — Putting Things Away with Decision Tree & A* Algorithm
+📁 `4.Putting_things_away_with_DesicionTree_&_A_star_algoritham/`
+
+- **Decision Tree** classifies objects and determines target location (basket)
+- **A\* Algorithm** computes the optimal path from current position to basket
+- Guides the robot arm + base to deliver the toy to the correct destination
+- Handles dynamic re-routing if the path is blocked
+
+### ROS 2 Orchestration
+📁 `ros2_nodes/`
+
+- Master state machine node coordinates all four modules in sequence
+- Detection → Navigation → Pick & Place → Path Planning → Loop
+- All nodes communicate via ROS 2 topics and services
+- Single launch file starts the entire system with one command
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Ubuntu 22.04
-- ROS 2 Humble installed
+
+- Ubuntu 22.04 (laptop) / Ubuntu 20.04 (Jetson Nano)
+- ROS 2 Humble installed on both machines
 - Python 3.10+
+- Arduino IDE for motor controller firmware
 - Physical robot with ROS 2 compatible drivers
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/thws-toy-sorting-robot.git
-cd thws-toy-sorting-robot
+git clone https://github.com/itsmedhruvin/Autonomous-Toy-Sorting-Robot-THWS.git
+cd Autonomous-Toy-Sorting-Robot-THWS
 
 # Install Python dependencies
 pip install -r requirements.txt
@@ -174,23 +213,21 @@ source install/setup.bash
 ### Running the Full System
 
 ```bash
-# Launch all nodes at once
-ros2 launch toy_sorting_robot full_system.launch.py
+# Launch all nodes at once (run on Jetson Nano)
+ros2 launch ros2_nodes/launch/full_system.launch.py
 
 # Or run individual modules for testing
-python detection/yolo_detector.py          # Test detection only
-python manipulation/q_learning_agent.py   # Train/test Q-Learning
-ros2 run toy_sorting_robot navigator      # Test navigation only
-```
+# Module 1 — Detection
+python 1.ToyDetection_with_NeuralNetwork_SupervisedLearning/yolo_detector.py
 
-### Training the Q-Learning Agent
+# Module 2 — Q-Learning arm (train)
+python "2.pickingUp_puttingAway_with_ReinforcementLearning_&_GeneticAlgoritham/q_learning_agent.py" --mode train
 
-```bash
-# Run Q-Learning training on physical robot
-python manipulation/q_learning_agent.py --mode train --episodes 500
+# Module 3 — Navigation
+ros2 run ros2_nodes navigator
 
-# Test trained agent
-python manipulation/q_learning_agent.py --mode test
+# Module 4 — Path planning
+python "4.Putting_things_away_with_DesicionTree_&_A_star_algoritham/path_planner.py"
 ```
 
 ---
@@ -200,40 +237,51 @@ python manipulation/q_learning_agent.py --mode test
 | Metric | Result |
 |---|---|
 | Toy detection accuracy | 100% |
-| Avg. time per toy (detect → sorted) | 5 seconds |
+| Average time per toy (detect → sorted) | ~5 seconds |
 | Q-Learning convergence | ~500 episodes |
 | Physical trials completed | 100 |
 | Success rate (toy into basket) | 100% |
 
+---
+
+## 🔗 Course Reference
+
+This project implements and extends the code and concepts from:
+
+**Artificial Intelligence for Robotics – 2nd Edition** — Francis X. Govers III
+Published by Packt · Available on [Coursera](https://www.coursera.org/learn/packt-artificial-intelligence-for-robotics/)
+Original repository: [PacktPublishing/Artificial-Intelligence-for-Robotics-2e](https://github.com/PacktPublishing/Artificial-Intelligence-for-Robotics-2e)
+
+| Course Chapter | Topic | Folder in This Repo |
+|---|---|---|
+| Chapter 4 | YOLOv8 object recognition + supervised learning | `1.ToyDetection_with_NeuralNetwork_SupervisedLearning/` |
+| Chapter 5 | Reinforcement Learning + Genetic Algorithm | `2.pickingUp_puttingAway_with_ReinforcementLearning_&_GeneticAlgoritham/` |
+| Chapter 7 | CNN-based navigation without SLAM | `3.toy_navigation_with_CNN/` |
+| Chapter 8 | Decision Tree + A* path planning | `4.Putting_things_away_with_DesicionTree_&_A_star_algoritham/` |
+| Chapter 2 | ROS 2 node architecture | `ros2_nodes/` |
 
 ---
 
-| YOLOv8 object recognition | `detection/yolo_detector.py` |
-| CNN-based navigation | `navigation/navigator.py` |
-| Q-Learning for manipulation | `manipulation/q_learning_agent.py` |
-| ROS 2 node architecture | `ros2_nodes/` |
-| Subsumption robot design | Full pipeline architecture |
+## 👤 Author & Academic Context
 
----
-
-## Author
-
-| Name | Role |
+| Field | Detail |
 |---|---|
-| [Dhruvin Vekariya] | [e.g. Detection & ROS 2 integration] |
-| [Dhruvin Vekariya] | [e.g. Navigation & obstacle avoidance] |
-| [Dhruvin Vekariya] | [e.g. Q-Learning & arm control] |
-
-**Supervisor:** [Prof. Dr. Florian Mühlfeld]
-**Programme:** BEng Mechatronics — THWS Würzburg-Schweinfurt
-**Semester:** [e.g. Semester 4 — Winter 2024/25]
-
----
-
-## 📄 License
-
-MIT License — see [LICENSE](LICENSE) for details.
+| **Author** | Dhruvin Vekariya |
+| **GitHub** | [@itsmedhruvin](https://github.com/itsmedhruvin) |
+| **Programme** | BEng Mechatronics |
+| **University** | THWS — Technical University of Applied Sciences Würzburg-Schweinfurt |
+| **Supervisor** | Prof. Dr. Florian Mühlfeld |
+| **Semester** | Semester 4 — Winter 2024/25 |
+| **Campus** | Schweinfurt, Germany |
 
 ---
 
-*THWS — Technical University of Applied Sciences Würzburg-Schweinfurt · robotik.thws.de*
+## 📄 Licence
+
+This project is licensed under the **MIT Licence** — see [LICENSE](LICENSE) for full details.
+
+The original course code is copyright © Packt Publishing and Francis X. Govers III, used and adapted under the MIT licence granted by the original repository.
+
+---
+
+*THWS — Technical University of Applied Sciences Würzburg-Schweinfurt · [thws.de](https://www.thws.de/en/) · [robotik.thws.de](https://robotik.thws.de/en/)*
