@@ -42,25 +42,6 @@ This software was developed as a university project at:
 
 THIRD-PARTY CODE ATTRIBUTION
 
-Portions of this software are adapted from:
-
-  "Artificial Intelligence for Robotics – Second Edition"
-  Author:    Francis X. Govers III
-  Publisher: Packt Publishing Ltd.
-  Course:    https://www.coursera.org/learn/packt-artificial-intelligence-for-robotics/
-  GitHub:    https://github.com/PacktPublishing/Artificial-Intelligence-for-Robotics-2e
-
-  Original code copyright © 2024 Packt Publishing and Francis X. Govers III.
-  Used and adapted under the MIT Licence granted by the original repository.
-
-  Modules adapted from course:
-    Chapter 4 → 1.ToyDetection_with_NeuralNetwork_SupervisedLearning/
-    Chapter 5 → 2.pickingUp_puttingAway_with_ReinforcementLearning_&_GeneticAlgoritham/
-    Chapter 7 → 3.toy_navigation_with_CNN/
-    Chapter 8 → 4.Putting_things_away_with_DesicionTree_&_A_star_algoritham/
-    Chapter 2 → ros2_nodes/
-
-Additional third-party components used under their respective licences:
 
   Ultralytics YOLOv8   AGPL-3.0    https://github.com/ultralytics/ultralytics
   OpenCV               Apache 2.0  https://opencv.org/
