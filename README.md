@@ -129,7 +129,7 @@ Autonomous-Toy-Sorting-Robot-THWS/
 │
 ├── config/
 │   └── robot_params.yaml   ← Robot configuration parameters
-│
+|
 └── supporting_pictures/
     └── ← Photos and diagrams of the physical robot and system
 ```
