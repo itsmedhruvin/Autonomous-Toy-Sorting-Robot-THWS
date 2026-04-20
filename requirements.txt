@@ -1,0 +1,17 @@
+# THWS Toy-Sorting Robot — Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Computer vision & detection
+ultralytics>=8.0.0        # YOLOv8
+opencv-python>=4.8.0      # OpenCV
+
+# Numerical computing
+numpy>=1.24.0
+
+# ROS 2 Python packages (installed via apt, listed for reference)
+# sudo apt install ros-humble-cv-bridge
+# sudo apt install ros-humble-vision-msgs
+# rclpy                   # installed with ROS 2 Humble
+
+# Utilities
+pyyaml>=6.0
