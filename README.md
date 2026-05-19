@@ -244,22 +244,6 @@ python "4.Putting_things_away_with_DesicionTree_&_A_star_algoritham/path_planner
 
 ---
 
-## 🔗 Course Reference
-
-This project implements and extends the code and concepts from:
-
-**Artificial Intelligence for Robotics – 2nd Edition** — Francis X. Govers III
-Published by Packt · Available on [Coursera](https://www.coursera.org/learn/packt-artificial-intelligence-for-robotics/)
-Original repository: [PacktPublishing/Artificial-Intelligence-for-Robotics-2e](https://github.com/PacktPublishing/Artificial-Intelligence-for-Robotics-2e)
-
-| Course Chapter | Topic | Folder in This Repo |
-|---|---|---|
-| Chapter 4 | YOLOv8 object recognition + supervised learning | `1.ToyDetection_with_NeuralNetwork_SupervisedLearning/` |
-| Chapter 5 | Reinforcement Learning + Genetic Algorithm | `2.pickingUp_puttingAway_with_ReinforcementLearning_&_GeneticAlgoritham/` |
-| Chapter 7 | CNN-based navigation without SLAM | `3.toy_navigation_with_CNN/` |
-| Chapter 8 | Decision Tree + A* path planning | `4.Putting_things_away_with_DesicionTree_&_A_star_algoritham/` |
-| Chapter 2 | ROS 2 node architecture | `ros2_nodes/` |
-
 ---
 
 ## 👤 Author & Academic Context
